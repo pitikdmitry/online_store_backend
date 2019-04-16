@@ -1,1 +1,1 @@
-URL_PREFIX = 'api'
+URL_PREFIX = '/api'

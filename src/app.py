@@ -10,7 +10,7 @@ from src.utils.const import URL_PREFIX
 
 
 def setup_routes(app):
-    app.router.add_post(
+    app.router.add_get(
         f'{URL_PREFIX}/post/get_all',
         get_all,
     )
