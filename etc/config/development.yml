@@ -1,0 +1,4 @@
+# Application settings
+app:
+  environment: development
+  debug: true
