@@ -3,7 +3,7 @@ aiohttp==3.3.1
 
 # Data serialization and validation
 marshmallow==2.16.1
-PyYAML==3.12
+# PyYAML==3.12
 ujson==1.35
 
 # Data storage
