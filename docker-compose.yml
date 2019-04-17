@@ -16,25 +16,27 @@ services:
       - POSTGRES_USER=wb
       - POSTGRES_PASSWORD=wb
 
-  backend:
-    build: .
-    networks:
-      - backend
-    ports:
-      - 8080:8080
+#psql postgresql://wb:wb@localhost:5454/wb
 
-    stdin_open: true
-    tty: true
-
-    volumes:
-      - ./:/app/
-      - ./etc:/app/etc
-      - ./tests:/app/tests
-      - ./setup.cfg:/app/setup.cfg
-      - ./setup.py:/app/setup.py
-
-    environment:
-      - PYTHONPATH=/src
+#  backend:
+#    build: .
+#    networks:
+#      - backend
+#    ports:
+#      - 8080:8080
+#
+#    stdin_open: true
+#    tty: true
+#
+#    volumes:
+#      - ./:/app/
+#      - ./etc:/app/etc
+#      - ./tests:/app/tests
+#      - ./setup.cfg:/app/setup.cfg
+#      - ./setup.py:/app/setup.py
+#
+#    environment:
+#      - PYTHONPATH=/src
 
 
 networks:

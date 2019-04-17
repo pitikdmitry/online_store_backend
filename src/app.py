@@ -7,6 +7,7 @@ from blog.api import get_all
 from utils.config import load_config
 
 from utils.const import URL_PREFIX
+from databases import Database
 
 
 def setup_routes(app):
@@ -14,6 +15,20 @@ def setup_routes(app):
         f'{URL_PREFIX}/post/get_all',
         get_all,
     )
+
+
+def setup_database(app):
+    async def connect_to_db(*args, **kwargs):
+        await app.db.connect()
+
+    async def disconnect_from_db(*args, **kwargs):
+        await app.db.disconnect()
+
+    app.db = Database('postgresql://wb:wb@localhost:5454/wb')
+    app.on_startup.append(connect_to_db)
+    app.on_cleanup.append(disconnect_from_db)
+
+
 
 
 def create_app(config_path, loop):
@@ -35,5 +50,6 @@ def create_app(config_path, loop):
 
     app['config'] = config
     setup_routes(app)
+    setup_database(app)
 
     return app
