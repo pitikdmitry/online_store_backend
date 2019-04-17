@@ -1,20 +1,13 @@
 import ujson
 from aiohttp import web
 
+from database.models import PostCategories
+
 
 async def get_all(request: web.Request) -> web.Response:
-    # request.match_info['name']
+    async with request.app['db'].acquire() as conn:
+        result = await conn.execute(PostCategories.select())
+        results = await result.fetchall()
+        print(results)
 
-    # try:
-    #     request_body = await request.json()
-    # except json.decoder.JSONDecodeError as exc:
-    #     raise web.HTTPBadRequest(text=str(exc))
-    #
-    # query_result = await process_request(
-    #     app=request.app,
-    #     request_body=request_body,
-    #     auth_headers=request.get("user", {}).get("auth_headers", {}),
-    #     auth_cookies=request.get("user", {}).get("auth_cookies", {}),
-    # )
-
-    return web.json_response("Hello world", dumps=ujson.dumps)
+    return web.json_response(results, dumps=ujson.dumps)

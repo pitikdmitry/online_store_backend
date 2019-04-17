@@ -12,8 +12,19 @@ class AppSection(ma.Schema):
     debug = ma.fields.Boolean(missing=False)
 
 
+class PostgresSection(ma.Schema):
+    database = ma.fields.String(required=True)
+    user = ma.fields.String(required=True)
+    password = ma.fields.String(required=True)
+    host = ma.fields.String(required=True)
+    port = ma.fields.Integer(required=True)
+    minsize = ma.fields.Integer(required=False)
+    maxsize = ma.fields.Integer(required=False)
+
+
 class ConfigSchema(ma.Schema):
     app = ma.fields.Nested(AppSection, required=True)
+    postgres = ma.fields.Nested(PostgresSection, required=True)
 
 
 def load_config(path):

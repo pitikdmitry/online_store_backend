@@ -2,3 +2,12 @@
 app:
   environment: development
   debug: true
+
+postgres:
+  database: wb
+  user: wb
+  password: wb
+  host: localhost
+  port: 5454
+  minsize: 1
+  maxsize: 5

@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*
 """ Main application factory and setup
 """
+import aiopg.sa
+import sqlalchemy as sa
 from aiohttp import web
 
 from blog.api import get_all
@@ -18,17 +20,23 @@ def setup_routes(app):
 
 
 def setup_database(app):
-    async def connect_to_db(*args, **kwargs):
-        await app.db.connect()
+    async def init_pg(app):
+        conf = app['config']['postgres']
+        engine = await aiopg.sa.create_engine(
+            database=conf['database'],
+            user=conf['user'],
+            password=conf['password'],
+            host=conf['host'],
+            port=conf['port'],
+        )
+        app['db'] = engine
 
-    async def disconnect_from_db(*args, **kwargs):
-        await app.db.disconnect()
+    async def close_pg(app):
+        app['db'].close()
+        await app['db'].wait_closed()
 
-    app.db = Database('postgresql://wb:wb@localhost:5454/wb')
-    app.on_startup.append(connect_to_db)
-    app.on_cleanup.append(disconnect_from_db)
-
-
+    app.on_startup.append(init_pg)
+    app.on_cleanup.append(close_pg)
 
 
 def create_app(config_path, loop):
