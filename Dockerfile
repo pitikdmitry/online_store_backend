@@ -25,4 +25,4 @@ RUN echo ' ---> Clean up build environment' \
 
 USER weird_brains_user
 
-CMD ["python3.7", "src.entrypoints.tasks", "--config", "/app/etc/config/development.yml", "server"]
+CMD ["python3.7", "src/tasks.py", "--config", "/app/etc/config/development.yml", "server"]

@@ -6,7 +6,7 @@ import aiohttp
 import aiohttp.test_utils
 import click
 
-from src.app import create_app
+from app import create_app
 
 logger = logging.getLogger(__name__)
 

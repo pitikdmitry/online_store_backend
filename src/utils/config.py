@@ -1,7 +1,7 @@
 import yaml
 import marshmallow as ma
 
-from src.utils.errors import ImproperlyConfigured
+from utils.errors import ImproperlyConfigured
 
 
 class AppSection(ma.Schema):

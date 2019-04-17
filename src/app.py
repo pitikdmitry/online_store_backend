@@ -3,10 +3,10 @@
 """
 from aiohttp import web
 
-from src.blog.api import get_all
-from src.utils.config import load_config
+from blog.api import get_all
+from utils.config import load_config
 
-from src.utils.const import URL_PREFIX
+from utils.const import URL_PREFIX
 
 
 def setup_routes(app):
