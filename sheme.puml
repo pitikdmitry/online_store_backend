@@ -1,0 +1,24 @@
+@startuml
+
+post: id [INT]
+post: category_id [INT]
+post: title [TEXT]
+post: text [TEXT]
+post: main_img [TEXT]
+post: created_at [TIMESTAMP]
+post: last_updated [TIMESTAMP]
+post: is_deleted [BOOL]
+post -> post_categories
+
+
+post_categories: id [INT]
+post_categories: title [TEXT]
+
+
+post_images: id [INT]
+post_images: post_id [INT]
+post_images: path [TEXT]
+post_images --> post
+
+
+@enduml
