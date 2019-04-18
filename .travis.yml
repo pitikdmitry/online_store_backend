@@ -4,8 +4,8 @@ addons:
 before_install:
 - openssl aes-256-cbc -K $encrypted_87a0b5313f5d_key -iv $encrypted_87a0b5313f5d_iv -in deploy_rsa.enc -out deploy_rsa -d
 - eval "$(ssh-agent -s)"
-- chmod 600 /etc/deploy_rsa
-- ssh-add /etc/deploy_rsa
+- chmod 600 /tmp/deploy_rsa
+- ssh-add /tmp/deploy_rsa
 
 deploy:
   provider: script
