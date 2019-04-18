@@ -21,7 +21,7 @@ before_deploy:
   - ssh-add /tmp/deploy_rsa
 
 deploy:
-  provider: scriptchanged yml filename
+  provider: script
   skip_cleanup: true
   script: rsync -r --delete-after --quiet $TRAVIS_BUILD_DIR/ root@82.202.221.10:root/wb
   on:
