@@ -39,6 +39,19 @@ services:
       - PYTHONPATH=/src
 
 
+  nginx:
+    restart: always
+    build:
+      context: gate/
+    volumes:
+      - ./static:/static
+      - ./media:/media
+    networks:
+      - frontend
+    ports:
+      - "80:80"
+
+
 networks:
   frontend:
   backend:
