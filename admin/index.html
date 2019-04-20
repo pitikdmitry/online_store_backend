@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!--BOOTSTRAP-->
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="index.css">
+
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<body>
+    <div id="form-container">
+        <form enctype="multipart/form-data" id='file-catcher-id' name="file-catcher">
+            <fieldset>
+                <legend>New post</legend>
+                <div class="form-group">
+                    <label for="article-title">Title</label>
+                    <input type="text" id="article-title" name="title">
+                </div>
+
+                <div class="form-group">
+                    <label for="article-text">TExt</label>
+                    <textarea id="article-text" name="text" Rows="10" Cols="80"> </textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="file-input">Load pictures</label>
+                    <input id='file-input' type='file' name="file" multiple/>
+                </div>
+            </fieldset>
+
+            <button type='submit' class="btn btn-default">
+                Submit
+            </button>
+        </form>
+
+        <div id='file-list-display'></div>
+    </div>
+
+    <script src="index.js"></script>
+</body>
+</html>
