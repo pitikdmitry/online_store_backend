@@ -9,13 +9,18 @@ from blog.api import get_all
 from utils.config import load_config
 
 from utils.const import URL_PREFIX
-from databases import Database
+
+from src.blog.api import add
 
 
 def setup_routes(app):
     app.router.add_get(
         f'{URL_PREFIX}/post/get_all',
         get_all,
+    )
+    app.router.add_post(
+        f'{URL_PREFIX}/post/add',
+        add,
     )
 
 
