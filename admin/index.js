@@ -67,7 +67,7 @@
         console.log(request.status);
         if (request.status === 200) {
             resultDiv.innerHTML = 'Post saved';
-            alert(`Post saved`);
+            alert(`Result: ${request.status} ${request.response}`);
             setTimeout(function () {location.reload(true);}, 2000);
         } else {
             alert(`Result: ${request.status} ${request.response}`);
