@@ -57,18 +57,14 @@
 
 
   sendFile = function (fileList) {
-    // let form = document.getElementById("file-catcher");
-
     let formData = new FormData(form);
     for (let [key, value] of formData.entries()) {
       console.log(key, value);
     }
     let request = new XMLHttpRequest();
-
-    let category = select.options[select.selectedIndex].value;
+    // let category = select.options[select.selectedIndex].value;
 
     formData.set('file', fileList[0]);
-    formData.set('category', category);
     request.open("POST", 'http://localhost:8080/api/post/add');
     request.send(formData);
   };
