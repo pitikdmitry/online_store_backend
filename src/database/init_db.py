@@ -16,21 +16,25 @@ def create_tables(engine):
 
 def sample_data(engine):
     conn = engine.connect()
-
-    try:
-        conn.execute(PostCategories.insert(), [
+    categories = [
             {'title': 'testcat'},
-            {'title': 'interesting'}
-        ])
-    except sqlalchemy.exc.IntegrityError:
-        pass
-    finally:
-        conn.close()
+            {'title': 'interesting'},
+            {'title': 'moreinteresting'}
+        ]
+
+    for category in categories:
+        try:
+            conn.execute(PostCategories.insert(), category)
+        except sqlalchemy.exc.IntegrityError:
+            pass
+
+    conn.close()
 
 
 def fill_db():
     # config = load_config('/etc')
     db_url = 'postgresql://wb:wb@localhost:5454/wb'
+    # db_url = 'postgresql://wb:wb@postgres:5454/wb'
     engine = create_engine(db_url)
 
     create_tables(engine)

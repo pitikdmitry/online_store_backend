@@ -23,6 +23,6 @@ before_deploy:
 deploy:
   provider: script
   skip_cleanup: true
-  script: rsync -r --delete-after --quiet $TRAVIS_BUILD_DIR/ root@82.202.221.10:wb
+  script: rsync -r --exclude 'data' --exclude 'static' --exclude 'media' --delete-after --quiet $TRAVIS_BUILD_DIR/ root@82.202.221.10:wb && ssh root@185.143.172.57 -C "cd wb && PYTHONPATH=src/ python3 src/database/init_db.py && docker-compose up"
   on:
     branch: master
