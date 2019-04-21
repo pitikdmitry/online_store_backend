@@ -5,6 +5,10 @@ RUN echo ' ---> Setting up user environment' \
     && mkdir /app \
     && chown weird_brains_user /app
 
+# setting timezone
+ARG TZ=Europe/Moscow
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
 COPY requirements.txt /app
 
 RUN echo ' ---> Installing package dependencies' \
