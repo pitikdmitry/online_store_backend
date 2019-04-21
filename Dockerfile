@@ -21,8 +21,8 @@ RUN echo ' ---> Installing package from source' \
     && pip install -e /app
 
 # give user rights
-RUN chown -R weird_brains_user:weird_brains_user /app
-RUN chmod 755 /app
+#RUN chown -R weird_brains_user:weird_brains_user /app
+#RUN chmod 777 /app
 #RUN cd /app && mkdir static || true
 
 WORKDIR /app
@@ -32,6 +32,6 @@ RUN echo ' ---> Clean up build environment' \
     && rm -rf /var/cache/yum \
     && sh -c 'find . | grep -E "(_pycache_|\.pyc|\.pyo$)" | xargs rm -rf'
 
-USER weird_brains_user
+#USER weird_brains_user
 
 CMD ["python3.6", "src/tasks.py", "--config", "/app/etc/config/production.yml", "server"]
