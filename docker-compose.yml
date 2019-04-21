@@ -7,7 +7,7 @@ services:
     networks:
       - backend
     ports:
-      - "5454:5432"
+      - 5454:5432
     volumes:
       - ./data:/var/lib/postgresql/data
       - ./dumps:/dumps
@@ -51,10 +51,11 @@ services:
       - ./admin:/admin
     networks:
       - frontend
+      - backend
     ports:
       - "80:80"
-    links:
-      - backend
+#    links:
+#      - backend
 
 
 networks:
