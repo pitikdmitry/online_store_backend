@@ -6,7 +6,7 @@ from database.category_queries import get_all as get_all_categories
 
 async def get_all(request: web.Request) -> web.Response:
     async with request.app['db'].acquire() as conn:
-        raw_categories = get_all_categories(conn)
+        raw_categories = await get_all_categories(conn)
 
         schema = CategoryResponseSchema(many=True, strict=True)
         categories = schema.dump(raw_categories).data

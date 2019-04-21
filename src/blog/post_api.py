@@ -3,6 +3,7 @@ from datetime import datetime
 
 from aiohttp import web, MultipartReader, hdrs
 
+from blog.schemas import PostRequestSchema
 from database.category_queries import get_category_by_title
 from database.models import PostCategories
 from database.post_queries import add_post
@@ -15,7 +16,7 @@ logger = logging.getLogger('post_api')
 async def add(request: web.Request) -> web.Response:
     async with request.app['db'].acquire() as conn:
         reader = MultipartReader.from_response(request)
-        data = {}
+        request_data = {}
 
         while True:
             part = await reader.next()
@@ -24,37 +25,36 @@ async def add(request: web.Request) -> web.Response:
 
             logger.debug(f"part_name: {part.name}")
 
-            if hdrs.CONTENT_TYPE in part.headers and (part.headers[hdrs.CONTENT_TYPE] == 'image/jpeg' or \
-                part.headers[hdrs.CONTENT_TYPE] == 'image/png'):
+            if hdrs.CONTENT_TYPE in part.headers and part.headers[hdrs.CONTENT_TYPE].startswith('image'):
                 metadata = await part.read()
                 path = ROOT_DIR + '/static/' + part.name + '.jpg'
                 with open(path, "wb") as f:
                     f.write(metadata)
 
-                data['main_img'] = path
+                    request_data[part.name] = path
             else:
                 metadata = await part.text()
+                request_data[part.name] = metadata
 
-                if part.name == 'category':
-                    category_id = await get_category_by_title(conn, title=metadata)
-                    data['category_id'] = category_id
-                    logger.info(f'category_id: {category_id}')
-                else:
-                    data[part.name] = metadata
+        current_time = datetime.now().isoformat()
+        request_data['created_at'] = current_time
+        request_data['last_updated'] = current_time
 
-        current_time = datetime.now()
-        data['created_at'] = current_time
-        data['last_updated'] = current_time
+        schema = PostRequestSchema(strict=True)
+        request = schema.load(request_data).data
 
-        await add_post(conn, data)
+        category_id = await get_category_by_title(conn, request['category'])
+        request['category_id'] = category_id
 
-    return web.json_response("OK")
+        await add_post(conn, request)
+
+    return web.json_response("Ok")
 
 
-async def get_all(request: web.Request) -> web.Response:
-    async with request.app['db'].acquire() as conn:
-        result = await conn.execute(PostCategories.select())
-        results = await result.fetchall()
-        print(results)
+# async def get_all(request: web.Request) -> web.Response:
+#     async with request.app['db'].acquire() as conn:
+#         result = await conn.execute(PostCategories.select())
+#         results = await result.fetchall()
+#         print(results)
 
     # return web.json_response(results, dumps=ujson.dumps)
