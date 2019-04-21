@@ -13,6 +13,17 @@ async def add_post(conn, data: Dict[str, str]):
     await conn.execute(stmt)
 
 
-async def get_all(conn):
-    result = await conn.execute(Post.select())
+async def get_all(conn, data):
+    # query chaining not working
+
+    if data.get('limit') and data.get('offset'):
+        query = Post.select().order_by(Post.c.last_updated.desc()).limit(data['limit']).offset(data['offset'])
+    elif data.get('limit'):
+        query = Post.select().order_by(Post.c.last_updated.desc()).limit(data['limit'])
+    elif data.get('offset'):
+        query = Post.select().order_by(Post.c.last_updated.desc()).offset(data['offset'])
+    else:
+        query = Post.select().order_by(Post.c.last_updated.desc())
+
+    result = await conn.execute(query)
     return await result.fetchall()

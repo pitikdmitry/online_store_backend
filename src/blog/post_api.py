@@ -4,7 +4,7 @@ from datetime import datetime
 from aiohttp import web, MultipartReader, hdrs
 
 from blog.api_utils import get_file_format, get_random_filename
-from blog.schemas import PostRequestSchema, PostResponseSchema
+from blog.schemas import PostRequestSchema, PostResponseSchema, GetPostsRequestSchema
 from database.category_queries import get_category_by_title
 from database.post_queries import add_post
 from database.post_queries import get_all as get_all_posts
@@ -57,7 +57,10 @@ async def add(request: web.Request) -> web.Response:
 
 async def get_all(request: web.Request) -> web.Response:
     async with request.app['db'].acquire() as conn:
-        raw_posts = await get_all_posts(conn)
+        schema = GetPostsRequestSchema(strict=True)
+        request = schema.load(request.rel_url.query).data
+
+        raw_posts = await get_all_posts(conn, request)
 
         schema = PostResponseSchema(many=True, strict=True)
         posts = schema.dump(raw_posts).data

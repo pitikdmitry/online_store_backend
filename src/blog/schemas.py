@@ -1,4 +1,4 @@
-from marshmallow import Schema, fields
+from marshmallow import Schema, fields, validate
 
 
 class PostRequestSchema(Schema):
@@ -18,6 +18,11 @@ class PostResponseSchema(Schema):
     main_img = fields.String(required=True)
     created_at = fields.DateTime(required=True)
     last_updated = fields.DateTime(required=True)
+
+
+class GetPostsRequestSchema(Schema):
+    offset = fields.Integer(required=False, missing=0, validate=validate.Range(min=0))
+    limit = fields.Integer(required=False, missing=0, validate=validate.Range(min=0, max=50))
 
 
 class CategoryResponseSchema(Schema):
