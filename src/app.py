@@ -31,19 +31,14 @@ def setup_routes(app):
 
 
 def setup_routes_cors(app, cors):
-    # app.router.add_get(
-    #     f'{URL_PREFIX}/post/get_all',
-    #     get_all_posts,
-    # )
-    app.router.add_post(
-        f'{URL_PREFIX}/post/add',
-        add_post,
-    )
     category_get_all_resource = cors.add(app.router.add_resource(f'{URL_PREFIX}/category/get_all'))
     cors.add(category_get_all_resource.add_route("GET", get_all_categories))
 
     post_add_resource = cors.add(app.router.add_resource(f'{URL_PREFIX}/post/add'))
     cors.add(post_add_resource.add_route("POST", add_post))
+
+    post_get_all_resource = cors.add(app.router.add_resource(f'{URL_PREFIX}/post/get_all'))
+    cors.add(post_get_all_resource.add_route("GET", get_all_posts))
 
 
 def setup_database(app):

@@ -11,3 +11,8 @@ async def add_post(conn, data: Dict[str, str]):
                                 created_at=data['created_at'],
                                 last_updated=data['last_updated'])
     await conn.execute(stmt)
+
+
+async def get_all(conn):
+    result = await conn.execute(Post.select())
+    return await result.fetchall()

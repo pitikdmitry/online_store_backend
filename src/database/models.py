@@ -1,4 +1,5 @@
 from sqlalchemy import Table, Column, MetaData, Integer, String, ForeignKeyConstraint, DateTime
+from sqlalchemy.orm import relationship, mapper, backref
 
 metadata = MetaData()
 metadata.clear()

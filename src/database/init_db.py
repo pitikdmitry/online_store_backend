@@ -1,5 +1,6 @@
 import logging
 
+import sqlalchemy
 from sqlalchemy import MetaData, create_engine
 from database.models import PostCategories, Post
 from utils.config import load_config
@@ -15,10 +16,14 @@ def create_tables(engine):
 
 def sample_data(engine):
     conn = engine.connect()
-    conn.execute(PostCategories.insert(), [
-        {'title': 'testcat'}
-    ])
-    conn.close()
+    try:
+        conn.execute(PostCategories.insert(), [
+            {'title': 'testcat'}
+        ])
+    except sqlalchemy.exc.IntegrityError:
+        pass
+    finally:
+        conn.close()
 
 
 if __name__ == '__main__':
