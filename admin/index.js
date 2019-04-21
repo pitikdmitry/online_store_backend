@@ -6,17 +6,12 @@
   let fileList = [];
   let renderFileList, sendFile, loadCategories;
   let form = document.forms.namedItem("file-catcher");
-  let select = document.getElementById("category-select");
   let resultDiv = document.getElementById("result");
 
   fileCatcher.addEventListener('submit', function (evnt) {
     evnt.preventDefault();
 
     sendFile(fileList);
-
-    //
-    // fileList.forEach(function (file) {
-    // });
   });
 
   fileInput.addEventListener('change', function (evnt) {
@@ -73,7 +68,6 @@
             alert(`Result: ${request.status} ${request.response}`);
         }
     };
-    // let category = select.options[select.selectedIndex].value;
 
     formData.set('main_img', fileList[0]);
     request.open("POST", 'http://localhost:8080/api/post/add');
