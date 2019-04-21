@@ -4,9 +4,8 @@
   let fileListDisplay = document.getElementById('file-list-display');
 
   let fileList = [];
-  let renderFileList, sendFile;
+  let renderFileList, sendFile, loadCategories;
   let form = document.forms.namedItem("file-catcher");
-
 
   fileCatcher.addEventListener('submit', function (evnt) {
     evnt.preventDefault();
@@ -35,6 +34,28 @@
     });
   };
 
+  loadCategories = function () {
+    fetch('http://localhost:80/api/category/get_all', {
+            mode: 'cors',
+            headers: {
+                'Access-Control-Allow-Origin': '*'
+            }
+        }).then(function (response) {
+            response = response.json();
+            let categorySelect = document.getElementById("category-select");
+
+            for (let element in response) {
+                let option = document.createElement("option");
+                debugger;
+                option.text = element.title;
+                categorySelect.add(option);
+            }
+        })
+    };
+
+  loadCategories();
+
+
   sendFile = function (fileList) {
     // let form = document.getElementById("file-catcher");
 
@@ -46,7 +67,7 @@
 
     debugger;
     formData.set('file', fileList[0]);
-    request.open("POST", 'http://localhost:8080/api/post/add');
+    request.open("POST", 'http://localhost:80/api/post/add');
     request.send(formData);
   };
 })();
