@@ -23,6 +23,7 @@ class PostResponseSchema(Schema):
 class GetPostsRequestSchema(Schema):
     offset = fields.Integer(required=False, missing=0, validate=validate.Range(min=0))
     limit = fields.Integer(required=False, missing=0, validate=validate.Range(min=0, max=50))
+    category = fields.String(required=False, validate=validate.OneOf('interesting'))
 
 
 class CategoryResponseSchema(Schema):

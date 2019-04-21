@@ -16,9 +16,11 @@ def create_tables(engine):
 
 def sample_data(engine):
     conn = engine.connect()
+
     try:
         conn.execute(PostCategories.insert(), [
-            {'title': 'testcat'}
+            {'title': 'testcat'},
+            {'title': 'interesting'}
         ])
     except sqlalchemy.exc.IntegrityError:
         pass
