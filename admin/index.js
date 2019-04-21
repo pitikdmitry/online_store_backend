@@ -32,7 +32,7 @@
   };
 
   loadCategories = function () {
-    fetch('http://localhost:80/api/category/get_all').then(res => res.json())
+    fetch('http://82.202.204.246:80/api/category/get_all').then(res => res.json())
         .then(function (response) {
             let categorySelect = document.getElementById("category-select");
             response.forEach(function myFunction(value, index, array) {
@@ -65,7 +65,7 @@
     };
 
     formData.set('main_img', fileList[0]);
-    request.open("POST", 'http://localhost:80/api/post/add');
+    request.open("POST", 'http://82.202.204.246:80/api/post/add');
     request.send(formData);
   };
 })();
