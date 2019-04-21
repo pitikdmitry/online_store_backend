@@ -1,6 +1,5 @@
 # Web server and connectors
 aiohttp==3.3.1
-aiohttp_jinja2
 
 # Data serialization and validation
 marshmallow==2.16.1
