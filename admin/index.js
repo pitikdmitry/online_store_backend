@@ -32,11 +32,7 @@
   };
 
   loadCategories = function () {
-    fetch('http://localhost:80/api/category/get_all', {
-            mode: 'cors',
-
-
-        }).then(res => res.json())
+    fetch('http://localhost:80/api/category/get_all').then(res => res.json())
         .then(function (response) {
             let categorySelect = document.getElementById("category-select");
             response.forEach(function myFunction(value, index, array) {
