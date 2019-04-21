@@ -2,10 +2,10 @@ from marshmallow import Schema, fields, validate
 
 
 class PostRequestSchema(Schema):
-    category = fields.String(required=True)
-    title = fields.String(required=True)
-    text = fields.String(required=True)
-    main_img = fields.String(required=True)
+    category = fields.String(required=True, validate=validate.Length(min=1))
+    title = fields.String(required=True, validate=validate.Length(min=1))
+    text = fields.String(required=True, validate=validate.Length(min=1))
+    main_img = fields.String(required=True, validate=validate.Length(min=1))
     created_at = fields.DateTime(required=True)
     last_updated = fields.DateTime(required=True)
 
