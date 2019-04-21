@@ -38,18 +38,23 @@ services:
     environment:
       - PYTHONPATH=/src
 
+    links:
+      - postgres
+
 
   nginx:
     restart: always
     build:
-      context: gate/
+      context: nginx/
     volumes:
       - ./static:/static
-      - ./media:/media
+      - ./admin:/admin
     networks:
       - frontend
     ports:
       - "80:80"
+    links:
+      - backend
 
 
 networks:

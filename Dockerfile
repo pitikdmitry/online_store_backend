@@ -1,4 +1,4 @@
-FROM python:3.7
+FROM python:3.6
 
 RUN echo ' ---> Setting up user environment' \
     && useradd -ms /bin/bash weird_brains_user \
@@ -25,4 +25,4 @@ RUN echo ' ---> Clean up build environment' \
 
 USER weird_brains_user
 
-CMD ["python3.7", "src/tasks.py", "--config", "/app/etc/config/development.yml", "server"]
+CMD ["python3.6", "src/tasks.py", "--config", "/app/etc/config/development.yml", "server"]
