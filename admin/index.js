@@ -32,11 +32,9 @@
   };
 
   loadCategories = function () {
-    fetch('http://localhost:80/api/category/get_all', {
+    fetch('http://localhost:8080/api/category/get_all', {
             mode: 'cors',
-            headers: {
-                'Access-Control-Allow-Origin': '*'
-            }
+
         }).then(res => res.json())
         .then(function (response) {
             let categorySelect = document.getElementById("category-select");
@@ -70,7 +68,7 @@
     };
 
     formData.set('main_img', fileList[0]);
-    request.open("POST", 'http://localhost:80/api/post/add');
+    request.open("POST", 'http://localhost:8080/api/post/add');
     request.send(formData);
   };
 })();
