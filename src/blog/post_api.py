@@ -3,6 +3,7 @@ from datetime import datetime
 
 from aiohttp import web, MultipartReader, hdrs
 
+from blog.api_utils import get_file_format, get_random_filename
 from blog.schemas import PostRequestSchema
 from database.category_queries import get_category_by_title
 from database.models import PostCategories
@@ -27,7 +28,11 @@ async def add(request: web.Request) -> web.Response:
 
             if hdrs.CONTENT_TYPE in part.headers and part.headers[hdrs.CONTENT_TYPE].startswith('image'):
                 metadata = await part.read()
-                path = ROOT_DIR + '/static/' + part.name + '.jpg'
+
+                filename = get_random_filename()
+                filename += get_file_format(part.headers[hdrs.CONTENT_TYPE])
+                path = ROOT_DIR + '/static/' + filename
+
                 with open(path, "wb") as f:
                     f.write(metadata)
 
@@ -51,7 +56,8 @@ async def add(request: web.Request) -> web.Response:
     return web.json_response("Ok")
 
 
-# async def get_all(request: web.Request) -> web.Response:
+async def get_all(request: web.Request) -> web.Response:
+    pass
 #     async with request.app['db'].acquire() as conn:
 #         result = await conn.execute(PostCategories.select())
 #         results = await result.fetchall()
