@@ -28,7 +28,7 @@ def sample_data(engine):
         conn.close()
 
 
-if __name__ == '__main__':
+def fill_db():
     # config = load_config('/etc')
     db_url = 'postgresql://wb:wb@localhost:5454/wb'
     engine = create_engine(db_url)
@@ -36,3 +36,7 @@ if __name__ == '__main__':
     create_tables(engine)
     sample_data(engine)
     logger.info('database tables created')
+
+
+if __name__ == '__main__':
+    fill_db()

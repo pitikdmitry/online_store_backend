@@ -2,12 +2,12 @@
 """ Main application factory and setup
 """
 import aiopg.sa
-import sqlalchemy as sa
 from aiohttp import web
 
 from blog.category_api import get_all as get_all_categories
 from blog.post_api import get_all as get_all_posts
 from blog.post_api import add as add_post
+from middlewares import setup_middlewares
 from utils.config import load_config
 
 from utils.const import URL_PREFIX
@@ -70,13 +70,11 @@ def create_app(config_path, loop):
     # Debug mode
     debug_mode = config.get('app', {}).get('debug', False)
 
-    # registering middlewares
-    # middlewares = [error_middleware]
-    middlewares = []
-
     app = web.Application(loop=loop,
-                          middlewares=middlewares,
                           debug=debug_mode)
+
+    # registering middlewares
+    setup_middlewares(app)
 
     app['config'] = config
     cors = aiohttp_cors.setup(app, defaults={
