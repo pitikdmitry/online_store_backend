@@ -54,8 +54,8 @@ services:
       - backend
     ports:
       - "80:80"
-#    links:
-#      - backend
+    links:
+      - backend
 
 
 networks:

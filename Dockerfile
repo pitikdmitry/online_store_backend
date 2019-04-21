@@ -20,6 +20,11 @@ COPY . /app
 RUN echo ' ---> Installing package from source' \
     && pip install -e /app
 
+# give user rights
+RUN chown -R weird_brains_user:weird_brains_user /app
+RUN chmod 755 /app
+RUN cd /app && mkdir static
+
 WORKDIR /app
 
 RUN echo ' ---> Clean up build environment' \

@@ -7,6 +7,7 @@
   let renderFileList, sendFile, loadCategories;
   let form = document.forms.namedItem("file-catcher");
   let resultDiv = document.getElementById("result");
+  const host = '82.202.204.246';
 
   fileCatcher.addEventListener('submit', function (evnt) {
     evnt.preventDefault();
