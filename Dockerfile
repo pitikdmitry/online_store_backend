@@ -23,7 +23,7 @@ RUN echo ' ---> Installing package from source' \
 # give user rights
 RUN chown -R weird_brains_user:weird_brains_user /app
 RUN chmod 755 /app
-RUN cd /app && mkdir static
+#RUN cd /app && mkdir static || true
 
 WORKDIR /app
 
