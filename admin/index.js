@@ -35,6 +35,7 @@
     fetch('http://localhost:8080/api/category/get_all', {
             mode: 'cors',
 
+
         }).then(res => res.json())
         .then(function (response) {
             let categorySelect = document.getElementById("category-select");
