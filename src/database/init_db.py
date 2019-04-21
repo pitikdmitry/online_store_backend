@@ -1,7 +1,8 @@
 import logging
 
 from sqlalchemy import MetaData, create_engine
-from database.models import PostCategories
+from database.models import PostCategories, Post
+from utils.config import load_config
 
 DSN = "postgresql://{user}:{password}@{host}:{port}/{database}"
 logger = logging.getLogger('init_db')
@@ -9,7 +10,7 @@ logger = logging.getLogger('init_db')
 
 def create_tables(engine):
     meta = MetaData()
-    meta.create_all(bind=engine, tables=[PostCategories])
+    meta.create_all(bind=engine, tables=[PostCategories, Post])
 
 
 def sample_data(engine):
@@ -21,7 +22,7 @@ def sample_data(engine):
 
 
 if __name__ == '__main__':
-    # db_url = DSN.format(**config['postgres'])
+    # config = load_config('/etc')
     db_url = 'postgresql://wb:wb@localhost:5454/wb'
     engine = create_engine(db_url)
 
