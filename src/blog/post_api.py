@@ -15,6 +15,8 @@ async def add(request: web.Request) -> web.Response:
             if part is None:
                 break
 
+            print(f"part_namne: {part.name}")
+
             if hdrs.CONTENT_TYPE in part.headers and (part.headers[hdrs.CONTENT_TYPE] == 'image/jpeg' or \
                 part.headers[hdrs.CONTENT_TYPE] == 'image/png'):
                 metadata = await part.read()

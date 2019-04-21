@@ -6,6 +6,7 @@
   let fileList = [];
   let renderFileList, sendFile, loadCategories;
   let form = document.forms.namedItem("file-catcher");
+  let select = document.getElementById("category-select");
 
   fileCatcher.addEventListener('submit', function (evnt) {
     evnt.preventDefault();
@@ -35,21 +36,20 @@
   };
 
   loadCategories = function () {
-    fetch('http://localhost:80/api/category/get_all', {
+    fetch('http://localhost:8080/api/category/get_all', {
             mode: 'cors',
             headers: {
                 'Access-Control-Allow-Origin': '*'
             }
-        }).then(function (response) {
-            response = response.json();
+        }).then(res => res.json())
+        .then(function (response) {
             let categorySelect = document.getElementById("category-select");
+            response.forEach(function myFunction(value, index, array) {
 
-            for (let element in response) {
                 let option = document.createElement("option");
-                debugger;
-                option.text = element.title;
+                option.text = value.title;
                 categorySelect.add(option);
-            }
+            });
         })
     };
 
@@ -60,14 +60,16 @@
     // let form = document.getElementById("file-catcher");
 
     let formData = new FormData(form);
-    for (var [key, value] of formData.entries()) {
+    for (let [key, value] of formData.entries()) {
       console.log(key, value);
     }
     let request = new XMLHttpRequest();
 
-    debugger;
+    let category = select.options[select.selectedIndex].value;
+
     formData.set('file', fileList[0]);
-    request.open("POST", 'http://localhost:80/api/post/add');
+    formData.set('category', category);
+    request.open("POST", 'http://localhost:8080/api/post/add');
     request.send(formData);
   };
 })();

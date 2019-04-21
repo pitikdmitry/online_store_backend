@@ -1,0 +1,11 @@
+# Application settings
+app:
+  environment: development
+  debug: true
+
+postgres:
+  database: wb
+  user: wb
+  password: wb
+  host: postgres
+  port: 5432

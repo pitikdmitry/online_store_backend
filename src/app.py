@@ -7,11 +7,12 @@ from aiohttp import web
 
 from blog.category_api import get_all as get_all_categories
 from blog.post_api import get_all as get_all_posts
+from blog.post_api import add as add_post
 from utils.config import load_config
 
 from utils.const import URL_PREFIX
 
-from src.blog.post_api import add
+import aiohttp_cors
 
 
 def setup_routes(app):
@@ -21,12 +22,28 @@ def setup_routes(app):
     )
     app.router.add_post(
         f'{URL_PREFIX}/post/add',
-        add,
+        add_post,
     )
     app.router.add_get(
         f'{URL_PREFIX}/category/get_all',
         get_all_categories,
     )
+
+
+def setup_routes_cors(app, cors):
+    # app.router.add_get(
+    #     f'{URL_PREFIX}/post/get_all',
+    #     get_all_posts,
+    # )
+    app.router.add_post(
+        f'{URL_PREFIX}/post/add',
+        add_post,
+    )
+    category_get_all_resource = cors.add(app.router.add_resource(f'{URL_PREFIX}/category/get_all'))
+    cors.add(category_get_all_resource.add_route("GET", get_all_categories))
+
+    post_add_resource = cors.add(app.router.add_resource(f'{URL_PREFIX}/post/add'))
+    cors.add(post_add_resource.add_route("POST", add_post))
 
 
 def setup_database(app):
@@ -67,7 +84,15 @@ def create_app(config_path, loop):
                           debug=debug_mode)
 
     app['config'] = config
+    cors = aiohttp_cors.setup(app, defaults={
+        "*": aiohttp_cors.ResourceOptions(
+            allow_credentials=True,
+            expose_headers="*",
+            allow_headers="*",
+        )
+    })
     setup_routes(app)
+    setup_routes_cors(app, cors)
     setup_database(app)
 
     return app
