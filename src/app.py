@@ -5,22 +5,27 @@ import aiopg.sa
 import sqlalchemy as sa
 from aiohttp import web
 
-from blog.api import get_all
+from blog.category_api import get_all as get_all_categories
+from blog.post_api import get_all as get_all_posts
 from utils.config import load_config
 
 from utils.const import URL_PREFIX
 
-from src.blog.api import add
+from src.blog.post_api import add
 
 
 def setup_routes(app):
     app.router.add_get(
         f'{URL_PREFIX}/post/get_all',
-        get_all,
+        get_all_posts,
     )
     app.router.add_post(
         f'{URL_PREFIX}/post/add',
         add,
+    )
+    app.router.add_get(
+        f'{URL_PREFIX}/category/get_all',
+        get_all_categories,
     )
 
 

@@ -1,7 +1,10 @@
+import logging
+
 from sqlalchemy import MetaData, create_engine
 from database.models import PostCategories
 
 DSN = "postgresql://{user}:{password}@{host}:{port}/{database}"
+logger = logging.getLogger('init_db')
 
 
 def create_tables(engine):
@@ -12,7 +15,7 @@ def create_tables(engine):
 def sample_data(engine):
     conn = engine.connect()
     conn.execute(PostCategories.insert(), [
-        {'title': 'What\'s new?'}
+        {'title': 'testcat'}
     ])
     conn.close()
 
@@ -24,3 +27,4 @@ if __name__ == '__main__':
 
     create_tables(engine)
     sample_data(engine)
+    logger.info('database tables created')
