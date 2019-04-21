@@ -7,6 +7,7 @@
   let renderFileList, sendFile, loadCategories;
   let form = document.forms.namedItem("file-catcher");
   let select = document.getElementById("category-select");
+  let resultDiv = document.getElementById("result");
 
   fileCatcher.addEventListener('submit', function (evnt) {
     evnt.preventDefault();
@@ -62,6 +63,16 @@
       console.log(key, value);
     }
     let request = new XMLHttpRequest();
+    request.onload = function() {
+        console.log(request.status);
+        if (request.status === 200) {
+            resultDiv.innerHTML = 'Post saved';
+            alert(`Post saved`);
+            setTimeout(function () {location.reload(true);}, 2000);
+        } else {
+            alert(`Result: ${request.status} ${request.response}`);
+        }
+    };
     // let category = select.options[select.selectedIndex].value;
 
     formData.set('main_img', fileList[0]);
