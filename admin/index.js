@@ -64,7 +64,7 @@
     let request = new XMLHttpRequest();
     // let category = select.options[select.selectedIndex].value;
 
-    formData.set('file', fileList[0]);
+    formData.set('main_img', fileList[0]);
     request.open("POST", 'http://localhost:8080/api/post/add');
     request.send(formData);
   };
