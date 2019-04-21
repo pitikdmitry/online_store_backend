@@ -77,13 +77,7 @@ def create_app(config_path, loop):
     setup_middlewares(app)
 
     app['config'] = config
-    cors = aiohttp_cors.setup(app, defaults={
-        "*": aiohttp_cors.ResourceOptions(
-            allow_credentials=True,
-            expose_headers="*",
-            allow_headers="*",
-        )
-    })
+    cors = aiohttp_cors.setup(app)
     # setup_routes(app)
     setup_routes_cors(app, cors)
     setup_database(app)
