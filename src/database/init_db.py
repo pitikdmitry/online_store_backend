@@ -2,8 +2,8 @@ import logging
 
 import sqlalchemy
 from sqlalchemy import MetaData, create_engine
+
 from database.models import PostCategories, Post
-from utils.config import load_config
 
 DSN = "postgresql://{user}:{password}@{host}:{port}/{database}"
 logger = logging.getLogger('init_db')
