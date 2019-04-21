@@ -31,12 +31,13 @@ async def add(request: web.Request) -> web.Response:
 
                 filename = get_random_filename()
                 filename += get_file_format(part.headers[hdrs.CONTENT_TYPE])
-                path = ROOT_DIR + '/static/' + filename
+                db_path = '/static/' + filename
+                path = ROOT_DIR + db_path
 
                 with open(path, "wb") as f:
                     f.write(metadata)
 
-                    request_data[part.name] = path
+                request_data[part.name] = db_path
             else:
                 metadata = await part.text()
                 request_data[part.name] = metadata
