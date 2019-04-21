@@ -91,7 +91,7 @@ def create_app(config_path, loop):
             allow_headers="*",
         )
     })
-    setup_routes(app)
+    # setup_routes(app)
     setup_routes_cors(app, cors)
     setup_database(app)
 

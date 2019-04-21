@@ -1,16 +1,14 @@
-from aiohttp import web, MultipartReader, hdrs
+from aiohttp import web
 
 from blog.schemas import CategoryResponseSchema
-from database.models import PostCategories
+from database.category_queries import get_all as get_all_categories
 
 
 async def get_all(request: web.Request) -> web.Response:
     async with request.app['db'].acquire() as conn:
-        result = await conn.execute(PostCategories.select())
-        results = await result.fetchall()
+        raw_categories = get_all_categories(conn)
 
         schema = CategoryResponseSchema(many=True, strict=True)
-        categories = schema.dump(results).data
-        print(results)
+        categories = schema.dump(raw_categories).data
 
         return web.json_response(categories, content_type="application/json")
