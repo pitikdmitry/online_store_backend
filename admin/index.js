@@ -33,7 +33,7 @@
   };
 
   loadCategories = function () {
-    fetch(`http://${host}}:80/api/category/get_all`).then(res => res.json())
+    fetch(`http://${host}:80/api/category/get_all`).then(res => res.json())
         .then(function (response) {
             let categorySelect = document.getElementById("category-select");
             response.forEach(function myFunction(value, index, array) {
