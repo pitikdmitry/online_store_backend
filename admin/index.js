@@ -7,7 +7,7 @@
   let renderFileList, sendFile, loadCategories;
   let form = document.forms.namedItem("file-catcher");
   let resultDiv = document.getElementById("result");
-  const host = '82.202.204.246';
+  const host = location.host;
 
   fileCatcher.addEventListener('submit', function (evnt) {
     evnt.preventDefault();
@@ -33,7 +33,7 @@
   };
 
   loadCategories = function () {
-    fetch('http://82.202.204.246:80/api/category/get_all').then(res => res.json())
+    fetch(`http://${host}}:80/api/category/get_all`).then(res => res.json())
         .then(function (response) {
             let categorySelect = document.getElementById("category-select");
             response.forEach(function myFunction(value, index, array) {
@@ -66,7 +66,7 @@
     };
 
     formData.set('main_img', fileList[0]);
-    request.open("POST", 'http://82.202.204.246:80/api/post/add');
+    request.open("POST", `http://${host}:80/api/post/add`);
     request.send(formData);
   };
 })();
