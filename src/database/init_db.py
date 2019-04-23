@@ -17,9 +17,9 @@ def create_tables(engine):
 def sample_data(engine):
     conn = engine.connect()
     categories = [
-            {'title': 'testcat'},
+            {'title': 'articles'},
             {'title': 'interesting'},
-            {'title': 'moreinteresting'}
+            {'title': 'shop'}
         ]
 
     for category in categories:
