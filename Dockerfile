@@ -34,4 +34,4 @@ RUN echo ' ---> Clean up build environment' \
 
 #USER weird_brains_user
 
-CMD ["python3.6", "src/tasks.py", "--config", "/app/etc/config/production.yml", "server"]
+CMD sleep 20 && python3.6 src/tasks.py --config /app/etc/config/production.yml server
