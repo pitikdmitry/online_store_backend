@@ -44,6 +44,7 @@ services:
   frontend-builder:
     build:
       context: ./weird_brains_frontend/
+      dockerfile: Dockerfile-builder
     volumes:
       - ./static:/static
 
