@@ -1,0 +1,3 @@
+[submodule "weird_brains_frontend"]
+	path = weird_brains_frontend
+	url = https://github.com/EkaterinaSukhanova/weird_brains_frontend

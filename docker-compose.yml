@@ -41,6 +41,11 @@ services:
     links:
       - postgres
 
+  frontend-builder:
+    build:
+      context: ./weird_brains_frontend/
+    volumes:
+      - ./static:/static
 
   nginx:
     restart: always
