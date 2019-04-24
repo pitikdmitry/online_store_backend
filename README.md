@@ -24,7 +24,9 @@ Aim of the project is to show how i write code and to demonstrate some of my ski
 * sqlachemy orm with aiopg connector
 * nginx proxies /api requests to backend server, returns static content (react application and it's resources and images)
 * api tests on pytest library
+* front-end is added by submodule
 * travis auto deploy on push to master branch
 
 ### Front-end
-Frontend functionallity was implemented by my colleague
+Frontend functionality was implemented by my colleague here: https://github.com/EkaterinaSukhanova/weird_brains_frontend
+
