@@ -18,6 +18,6 @@ deploy:
   skip_cleanup: true
   script: rsync -r --exclude 'data' --exclude 'static' --exclude 'media' --delete-after
     --quiet $TRAVIS_BUILD_DIR/ root@84.201.155.216:wb && ssh root@84.201.155.216 -C
-    "cd wb && docker-compose up --build -d"
+    "docker-compose up --build -d"
   on:
     branch: master
