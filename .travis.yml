@@ -4,10 +4,9 @@ services:
 install: true
 addons:
   ssh_known_hosts: 84.201.141.91
-
 before_install:
 - openssl aes-256-cbc -K $encrypted_87a0b5313f5d_key -iv $encrypted_87a0b5313f5d_iv
-  -in deploy_rsa.enc -out /tmp/ssh-copy-id -i deploy_rsa.pubdeploy_rsa -d
+  -in deploy_rsa.enc -out /tmp/deploy_rsa -d
 script:
 - echo "Script"
 before_deploy:
