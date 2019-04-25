@@ -1,0 +1,1 @@
+sudo apt-get update && sudo apt-get --assume-yes install docker.io && sudo apt-get --assume-yes install docker-compose && sudo apt-get --assume-yes install python3-pip
