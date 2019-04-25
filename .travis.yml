@@ -16,7 +16,7 @@ before_deploy:
 deploy:
   provider: script
   skip_cleanup: true
-  script: rsync -r --exclude 'data' --exclude 'static' --exclude 'media' --delete-after
+  script: rsync -r --exclude './data' --exclude './static' --exclude './media' --delete-after
     --quiet $TRAVIS_BUILD_DIR/ pitikdmitry@84.201.141.91:wb && ssh pitikdmitry@84.201.141.91
     -C "cd wb && docker-compose up --build -d"
   on:
