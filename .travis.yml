@@ -5,8 +5,8 @@ install: true
 addons:
   ssh_known_hosts: 84.201.155.216
 before_install:
-- openssl aes-256-cbc -K $encrypted_87a0b5313f5d_key -iv $encrypted_87a0b5313f5d_iv
-  -in deploy_rsa.enc -out /tmp/deploy_rsa -d
+- openssl aes-256-cbc -K $encrypted_ed05735a344a_key -iv $encrypted_ed05735a344a_iv
+  -in deploy_rsa.enc -out deploy_rsa -d
 script:
 - echo "Script"
 before_deploy:
@@ -17,7 +17,7 @@ deploy:
   provider: script
   skip_cleanup: true
   script: rsync -r --exclude 'data' --exclude 'static' --exclude 'media' --delete-after
-    --quiet $TRAVIS_BUILD_DIR/ root@84.201.155.216:wb && ssh root@84.201.155.216 -C "cd
-    wb && docker-compose up --build -d"
+    --quiet $TRAVIS_BUILD_DIR/ root@84.201.155.216:wb && ssh root@84.201.155.216 -C
+    "cd wb && git submodule init && git submodule update && docker-compose up --build -d"
   on:
     branch: master
