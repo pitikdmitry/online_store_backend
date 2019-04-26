@@ -1,1 +1,1 @@
-sudo apt-get update && sudo apt-get --assume-yes install docker.io && sudo apt-get --assume-yes install docker-compose && sudo apt-get --assume-yes install python3-pip && python3 -m pip install -r requirements.txt && cd src && PYTHONPATH=. python3 database/init_db.py
+sudo apt-get update && sudo apt-get --assume-yes install docker.io && sudo apt-get --assume-yes install docker-compose && sudo systemctl start docker && sudo systemctl enable docker && sudo apt-get --assume-yes install python3-pip
