@@ -1,7 +1,7 @@
 # Backend for weird-brains web-site on aiohttp web-server
 
 ### Website
-url
+http://weird-brains.club
 
 ### About project:
 Aim of the project is to show how i write code and to demonstrate some of my skills
@@ -28,5 +28,5 @@ Aim of the project is to show how i write code and to demonstrate some of my ski
 * travis auto deploy on push to master branch
 
 ### Front-end
-Frontend functionality was implemented by my colleague here: https://github.com/EkaterinaSukhanova/weird_brains_frontend
+Frontend functionality was implemented by my colleague here (it is in progress now): https://github.com/EkaterinaSukhanova/weird_brains_frontend
 
